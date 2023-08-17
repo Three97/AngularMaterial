@@ -7,5 +7,5 @@ export class User {
   avatar: string = "";
   bio: string = "";
 
-  Notes: Note[] = [];
+  notes: Note[] = [];
 }
