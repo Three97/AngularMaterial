@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Note } from '../../models/note';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -8,14 +9,23 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, AfterViewInit {
   
   @Input() notes: Note[];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   
   displayedColumns: string[] = ['position', 'title', 'date'];
   dataSource: MatTableDataSource<Note>;
 
-  constructor() { }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<Note>(this.notes);
