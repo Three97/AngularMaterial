@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent {
   @Output() toggleSidenav = new EventEmitter<void>();
+  @Output() toggleTheme = new EventEmitter<void>();
+  @Output() toggleDirection = new EventEmitter<void>();
   
   constructor(
     private newContactDialog: MatDialog,
