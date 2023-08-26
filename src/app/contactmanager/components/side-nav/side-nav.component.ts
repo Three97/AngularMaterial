@@ -26,15 +26,7 @@ export class SideNavComponent implements OnInit {
     private router: Router) { }
 
   @ViewChild(MatSidenav) sidenav: MatSidenav;
-
-  toggleTheme() {
-    this.isDarkTheme = !this.isDarkTheme;
-  }
-
-  toggleDirection() {
-    this.textLayoutDirection = this.textLayoutDirection === "ltr" ? "rtl" : "ltr";      
-  }
-
+  
   ngOnInit(): void {
     this.breakpointObserver
       .observe([ `(max-width: ${SMALL_WIDTH_BREAKPOINT}px)` ])
@@ -50,5 +42,13 @@ export class SideNavComponent implements OnInit {
         this.sidenav.close();
       }
     });
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+  }
+
+  toggleDirection() {
+    this.textLayoutDirection = this.textLayoutDirection === "ltr" ? "rtl" : "ltr";      
   }
 }
